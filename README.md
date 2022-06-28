@@ -1,2 +1,3 @@
+# Login App System using Django
 
-https://pythonguides.com/login-system-in-python-django/
+This is a simple app to allow user to register, login and view the profile
