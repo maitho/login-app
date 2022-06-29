@@ -7,7 +7,9 @@ COPY requirements.txt /app/requirements.txt
 RUN pip install -r requirements.txt
 COPY . /app
 
-EXPOSE 8000
+# EXPOSE 8000
+EXPOSE 80
+
 RUN chmod +x /app/start.sh
 
 ENTRYPOINT [ "./start.sh" ]
