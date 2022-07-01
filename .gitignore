@@ -4,9 +4,11 @@
 *.pyc
 __pycache__
 **/__pycache__
+login/__pycache__/*
 
 media
 db.sqlite3
 
 .ddcache
 .env
+*/vpc-dependencies.sh
