@@ -56,20 +56,43 @@
     {% if user.is_authenticated %}
     <h1 style="text-align:center;">Account Profile</h1>
     {% else %}
-    <h1 style="text-align:center;">Login System</h1>
+    <h1 style="text-align:center;">User Activity</h1>
     {% endif %}
   </div>
 
   <div class="card">
     <div class="card-body">
-      {% if user.is_authenticated %}
-      <h4 style="text-align:center;"><strong>Username: </strong>{{user.username}}</h4>
-      <h4 style="text-align:center;"><strong>Name: </strong>{{user.first_name}} {{user.last_name}}</h4>
-      <h4 style="text-align:center;"><strong>Email: </strong>{{user.email}}</h4>
-      {% else %}
-      <h6 style="text-align:center;">User login system, to allow user registration and access to view profile </h6>
-      {% endif %}
-      <br>
+
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">FirstName</th>
+                    <th scope="col">LastName</th>
+                    <th scope="col">Active</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for activity in activity %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ activity.username }}</td>
+                    <td>{{ activity.email }}</td>
+                    <td>{{ activity.first_name }}</td>
+                    <td>{{ activity.last_name }}</td>
+                    <td>
+                        {% if activity.is_active %}
+                        Yes
+                        {% else %}
+                        No
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </body>
 
