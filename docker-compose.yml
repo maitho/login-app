@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: mandela
+      MYSQL_DATABASE: login_app
+      MYSQL_USER: nelson
+      MYSQL_PASSWORD: mandela
+    volumes:
+      - ./db:/var/lib/mysql
+  web:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    env_file: .env
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/app
+      - /tmp/app/mysqld:/run/mysqld
+    depends_on:
+      - mysql

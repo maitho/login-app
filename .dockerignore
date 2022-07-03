@@ -4,3 +4,5 @@ db.sqlite3
 buildspec.yml
 .gitignore
 README.md
+Dockerfile.dev
+db
