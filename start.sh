@@ -5,5 +5,6 @@ while ! nc -z mysql 3306 ; do
     sleep 3
 done
 
+python manage.py createsuperuser --no-input
 python manage.py migrate
 python manage.py runserver 0.0.0.0:80
