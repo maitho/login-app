@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: login-app-deployment
+  namespace: login-app
+  labels:
+    app: django-login-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: django-login-app
+  template:
+    metadata:
+      labels:
+        app: django-login-app
+    spec:
+      containers:
+      - name: login-app
+        image: 542279893489.dkr.ecr.us-east-1.amazonaws.com/login-app:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        env:
+        - name: MYSQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: database
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: username
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: password
+        - name: MYSQL_DATABASE_HOST
+          value: mysql
+        - name: MYSQL_DATABASE_PORT
+          value: "3306"
+        - name: DJANGO_SUPERUSER_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: super-user-password
+        - name: DJANGO_SUPERUSER_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: super-user-username
+        - name: DJANGO_SUPERUSER_EMAIL
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: super-user-email
