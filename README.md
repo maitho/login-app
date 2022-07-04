@@ -19,10 +19,17 @@ Once the [stack](https://github.com/maitho/live-infra) has been deployed use the
 - Update kube config `Make update-kubeconfig`
 - Create a namespace `Make create-namespace`
 - Deploy MySQL `Make deploy-mysql-manifest`
+    - Create mysql user by executing to the mysql container `Make exec-pod pod=<-mysql-pod>` and run the following scripts:
+        - `mysql -uroot -pmandela`
+        - `CREATE user 'nelson'@'%' IDENTIFIED BY 'mandela';` and
+        - `CREATE user 'nelson'@'localhost' IDENTIFIED BY 'mandela';`
+        - `GRANT ALL PRIVILEGES ON login_app. * TO 'nelson'@'%';`
+        - `FLUSH PRIVILEGES`
 - Deploy the login app `Make deploy-svc-lb-manifest`
 - Delete MySQL `Make delete-mysql-manifest`
 - Delete login app `Make delete-svc-lb-manifest`
 - Get Load Balancer endpoint `Make get-lb`
+- Check id Load Balancer is ready to access `Make nslookup lb=<load-balancer>`
 
 ## Access the Application
 
