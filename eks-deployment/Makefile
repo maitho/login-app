@@ -30,6 +30,9 @@ deploy-login-manifest:
 delete-login-manifest:
 	kubectl delete -f login-manifest/
 
+get-lb:
+	kubectl -n $(namespace) get svc -o name
+
 
 get-pods:
 	kubectl get pods -n $(namespace)
