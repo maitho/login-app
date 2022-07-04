@@ -30,6 +30,13 @@ deploy-login-manifest:
 delete-login-manifest:
 	kubectl delete -f login-manifest/
 
+get-mysql-logs:
+	kubectl -n $(namespace) logs -f $(kubectl -n login-app get pod -l app=mysql -o name)
+get-lb:
+	kubectl -n $(namespace) get svc $(service) -o json | jq -r .status.loadBalancer.ingress[].hostname
+# Load Balancer DNS
+nslookup:
+	nslookup $(lb)
 
 get-pods:
 	kubectl get pods -n $(namespace)
@@ -67,6 +74,3 @@ exec-pod:
 
 pod-logs:
 	kubectl -n $(namespace) logs -f $(pod)
-
-nslookup:
-	nslookup $(lb) #loadbalancer
