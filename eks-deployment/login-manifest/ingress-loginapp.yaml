@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: "ingress"
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+  labels:
+    app: demoapp
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: login-app-service
+              servicePort: 80
+          # - path: /home/*
+          #   backend:
+          #     serviceName: login-app-service
+          #     servicePort: 80
+          # - path: /admin/*
+          #   backend:
+          #     serviceName: login-app-service
+          #     servicePort: 80

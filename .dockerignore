@@ -1,0 +1,9 @@
+__pycache__/
+db.sqlite3
+.git
+buildspec.yml
+.gitignore
+README.md
+Dockerfile.dev
+db
+ref
